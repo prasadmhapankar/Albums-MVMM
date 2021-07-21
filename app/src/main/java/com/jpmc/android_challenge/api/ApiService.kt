@@ -7,6 +7,6 @@ import retrofit2.http.GET
 interface ApiService {
 
     @GET(ApiConstants.ALBUMS)
-    suspend fun login() : Response<Album>
+    suspend fun getAlbums() : Response<List<Album>>
 
 }
