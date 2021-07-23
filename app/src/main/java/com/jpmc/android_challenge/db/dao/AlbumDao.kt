@@ -10,7 +10,4 @@ interface AlbumDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(albums: List<AlbumEntity>)
-
-    @Delete
-    fun delete(albumEntity: AlbumEntity)
 }

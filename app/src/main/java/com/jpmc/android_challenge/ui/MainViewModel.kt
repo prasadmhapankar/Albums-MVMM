@@ -1,5 +1,6 @@
 package com.jpmc.android_challenge.ui
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -22,6 +23,7 @@ class MainViewModel @Inject constructor(private val repository : AlbumsRepositor
 
     fun getAlbums(){
         viewModelScope.launch {
+            albumsLiveData.postValue(Result.loading(null))
             val response = withContext(Dispatchers.IO){
                 repository.getAlbums()
             }
@@ -35,6 +37,10 @@ class MainViewModel @Inject constructor(private val repository : AlbumsRepositor
             val sortedList = list.sortedBy { it.title }
             sortedAlbumsLiveData.postValue(sortedList)
         }
+    }
+
+    fun getAlbumsLiveData(): LiveData<Result<List<Album>>> {
+        return albumsLiveData
     }
 
 }
